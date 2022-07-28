@@ -4,12 +4,14 @@
   "description": "This for testing of dacast api",
   "main": "index.js",
   "scripts": {
-    "start": "dacast_apiKey='1658836307fFU6YTCgc23pUfiCUwFf3x24xpJd9W74' db='mongodb://localhost:27017/dacast_testing' nodemon index.js",
+    "start": "dacast_apiKey='1658836307fFU6YTCgc23pUfiCUwFf3x24xpJd9W74' db='mongodb://localhost:27017/dacast_testing' dacast_baseUrl='https://developer.dacast.com/v2' nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "engrmzubair",
   "license": "ISC",
   "dependencies": {
+    "api": "^4.5.1",
+    "axios": "^0.27.2",
     "config": "^3.3.7",
     "cors": "^2.8.5",
     "dacast": "^0.0.3",

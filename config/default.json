@@ -1,6 +1,7 @@
 {
   "dacast": {
-    "apiKey": ""
+    "apiKey": "",
+    "baseUrl": ""
   },
   "db": ""
 }

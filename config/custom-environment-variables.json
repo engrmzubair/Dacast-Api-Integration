@@ -1,6 +1,7 @@
 {
   "dacast": {
-    "apiKey": "dacast_apiKey"
+    "apiKey": "dacast_apiKey",
+    "baseUrl": "dacast_baseUrl"
   },
   "db": "db"
 }

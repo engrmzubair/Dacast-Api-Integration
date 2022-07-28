@@ -1,8 +1,10 @@
 const config = require('config');
 const dacast = require('dacast')(config.get('dacast.apiKey'));
 const Joi = require('joi');
+const axios = require('axios').default;
+const http = require("../httpRequests/apiRequest")
 
-exports.listChannels = (req, res) => {
+exports.listSteams = (req, res) => {
 
     /*
  * List all channels
@@ -21,7 +23,7 @@ exports.listChannels = (req, res) => {
 };
 
 
-exports.createChannel = (req, res) => {
+exports.createStream = (req, res) => {
 
     const { title, description } = req.body;
     const schema = Joi.object({
@@ -49,9 +51,9 @@ exports.createChannel = (req, res) => {
     });
 }
 
-exports.modifyChannel = (req, res) => {
+exports.modifyStream = (req, res) => {
 
-    const id = req.params.channelId;
+    const id = req.params.streamId
     // res.send(id)
     const { title } = req.body;
 
@@ -79,3 +81,48 @@ exports.modifyChannel = (req, res) => {
 
     res.send("channel modified.")
 }
+
+exports.deleteStream = (req, res) => {
+
+    const id = req.params.streamId;
+    /*
+    * Permanently deletes a channel. It cannot be undone. 
+    * Delete a channel object.
+    */
+    dacast.channel.delete({
+        id, // Required - Set your own channel id
+    }, function success() {
+        console.log('success');
+        res.send("Channel Deleted")
+    }, function fail(error) {
+        console.log('error', error);
+    });
+}
+
+exports.listStreamById = (req, res) => {
+
+    const id = req.params.streamId;
+
+    let options = {
+        method: "get",
+        headers: {
+            Accept: 'application/json',
+            'X-Format': 'default',
+            'X-Api-Key': '1658836307fFU6YTCgc23pUfiCUwFf3x24xpJd9W74'
+        }
+    }
+
+
+    axios.get(`${config.get("dacast.baseUrl")}/channel/${id}`, options)
+
+        .then(function (response) {
+            console.log("response ==> ", response.data)
+            return res.json(response.data);
+        })
+        .catch(function (error) {
+            res.status(500).json({ error })
+        })
+
+
+}
+

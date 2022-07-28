@@ -2,12 +2,16 @@ const router = require("express").Router();
 const live = require('../controllers/liveController');
 
 
-//list all channels
-router.get('/listChannels', live.listChannels);
-//create channel
-router.post('/createChannel', live.createChannel);
-//modify channel
-router.put('/modifyChannel/:channelId', live.modifyChannel);
+//list Streams
+router.get('/listStreams', live.listSteams);
+//List Stream By Id
+router.get('/listStream/:streamId', live.listStreamById);
+//create Stream
+router.post('/createStream', live.createStream);
+//modify Stream
+router.put('/modifyStream/:streamId', live.modifyStream);
+//delete Stream
+router.delete('/deleteStream/:streamId', live.deleteStream);
 
 
 
