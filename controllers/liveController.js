@@ -52,8 +52,8 @@ exports.createStream = (req, res) => {
 
 exports.modifyStream = (req, res) => {
 
-    const id = req.params.streamId
-    // res.send(id)
+    const id = req.params.streamId;
+
     const { title } = req.body;
 
     const schema = Joi.object({

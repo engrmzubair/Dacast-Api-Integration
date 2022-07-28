@@ -10,8 +10,6 @@
   "author": "engrmzubair",
   "license": "ISC",
   "dependencies": {
-    "api": "^4.5.1",
-    "axios": "^0.27.2",
     "config": "^3.3.7",
     "cors": "^2.8.5",
     "dacast": "^0.0.3",
