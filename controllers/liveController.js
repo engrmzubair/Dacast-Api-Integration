@@ -1,8 +1,7 @@
 const config = require('config');
+const { json } = require('express');
 const dacast = require('dacast')(config.get('dacast.apiKey'));
 const Joi = require('joi');
-const axios = require('axios').default;
-const http = require("../httpRequests/apiRequest")
 
 exports.listSteams = (req, res) => {
 
@@ -72,14 +71,11 @@ exports.modifyStream = (req, res) => {
         id, // Required - Set your own channel id
         title // Optional - See the documentation to get parameters list
     }, function (success) {
-        console.log('success', success);
-        res.json(success);
+        return res.json(success);
     }, function (error) {
-        console.log('error', error);
-        res.status(500)
+        return res.status(500).send(error)
     });
 
-    res.send("channel modified.")
 }
 
 exports.deleteStream = (req, res) => {
@@ -103,26 +99,10 @@ exports.listStreamById = (req, res) => {
 
     const id = req.params.streamId;
 
-    let options = {
-        method: "get",
-        headers: {
-            Accept: 'application/json',
-            'X-Format': 'default',
-            'X-Api-Key': '1658836307fFU6YTCgc23pUfiCUwFf3x24xpJd9W74'
-        }
-    }
-
-
-    axios.get(`${config.get("dacast.baseUrl")}/channel/${id}`, options)
-
-        .then(function (response) {
-            console.log("response ==> ", response.data)
-            return res.json(response.data);
-        })
-        .catch(function (error) {
-            res.status(500).json({ error })
-        })
-
-
+    dacast.channel.
+        get({ id },
+            success => res.json({ success }),
+            error => res.status(500).send(error)
+        )
 }
 
